@@ -107,7 +107,7 @@ const useRecommendPortfolio = () => {
       })
       .then((r) => r.data),
   );
-  return { data };
+  return { data: data || [] };
 };
 
 export {

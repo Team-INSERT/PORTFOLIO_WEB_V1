@@ -30,11 +30,6 @@ const DEFAULT_SEO: DefaultSeoProps = {
       },
     ],
   },
-  twitter: {
-    handle: "@handle",
-    site: "@site",
-    cardType: "summary_large_image",
-  },
 };
 
 const client = new QueryClient({

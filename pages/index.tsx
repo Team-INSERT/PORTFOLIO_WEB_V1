@@ -11,12 +11,12 @@ import RecommendIcon from "@/components/Icon/RecommendIcon";
 export default function Home() {
   const router = useRouter();
   const [keyword, setKeyword] = useState<SortType>("ALL");
+  const { data } = useRecommendPortfolio();
   const { pages, isFetchingNextPage, fetchNextPage, customHasNextPage } =
     usePortfolioList(
       { size: 12 },
       keyword !== "ALL" ? { sortType: keyword } : {},
     );
-  const { data } = useRecommendPortfolio();
 
   return (
     <MainLayout
@@ -31,14 +31,14 @@ export default function Home() {
       title={<MainTitle />}
       filter={<MainFilter keyword={keyword} setKeyword={setKeyword} />}
       recommend={
-        ["ALL", "BOOKMARKS"].includes(keyword) ? (
+        ["ALL", "BOOKMARKS"].includes(keyword) && (
           <>
             <div className="flex justify-center items-center rounded-full gap-[0.375rem] text-blue font-bold bg-white w-[8.5rem] h-[2.25rem] text-sm mb-[2.5rem]">
               <RecommendIcon size={24} />
               추천 프로젝트
             </div>
             <div className="flex flex-wrap gap-[1.5rem]">
-              {data?.list.map((portfolio: Portfolio) => (
+              {data.list.map((portfolio: Portfolio) => (
                 <PortfolioView
                   portfolio={portfolio}
                   onClick={() =>
@@ -50,7 +50,7 @@ export default function Home() {
             </div>
             <hr className="text-white my-10" />
           </>
-        ) : undefined
+        )
       }
     />
   );
